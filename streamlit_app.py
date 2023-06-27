@@ -125,6 +125,7 @@ def home_page():
                 Basically This model is trained on most of car images so when you load it it may work better with car images\
                 but rather than taking this pretrained weights you can also train it on your own set of images.. You can train it on any dataset you want.",
             "image": "supe.png",
+            "lottie_url":"https://assets3.lottiefiles.com/packages/lf20_vcvl4urd.json",
             "repository": "https://github.com/Keshav15/Image-Super-Resolution-Using-Autoencoders-in-Keras",
             "demo": "https://demo.project1.com"
         },
@@ -132,6 +133,7 @@ def home_page():
             "title": "Named Entity Recognition using BERT",
             "description": "Description of project 2",
             "image": "hirech.png",
+            "lottie_url":"https://assets1.lottiefiles.com/packages/lf20_Imjlj33KVc.json",
             "repository": "https://github.com/your_username/project2",
             "demo": "https://demo.project2.com"
         },
@@ -144,7 +146,7 @@ def home_page():
             st.markdown('<div class="project-card">', unsafe_allow_html=True)
             st.write(f"""## {project['title']}""")
             st_lottie(
-            load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_vcvl4urd.json"),
+            load_lottieurl(project['lottie_url']),
             height=500,width=800
         )
             st.write(f"""#### {project['description']} """)
