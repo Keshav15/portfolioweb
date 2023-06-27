@@ -1,5 +1,5 @@
 Pillow==9.0.1
-Pillow==9.5.0
+
 Requests==2.31.0
 streamlit==1.22.0
 streamlit_lottie==0.0.5
