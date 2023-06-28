@@ -1,9 +1,16 @@
 import requests
 import streamlit as st
 from streamlit_lottie import st_lottie
-
+import json
 
 from PIL import Image
+from streamlit_card import card
+
+
+
+with open('config.json') as cf:
+    cfile=json.load(cf)
+
 
 def navbar():
     st.markdown("""
@@ -36,10 +43,12 @@ def navbar():
     </div>""",unsafe_allow_html=True)
 
 
+
+
 def nameandphoto():
     columns=st.columns(2)
     with columns[0]:
-        st.title(" Hi 👋    I am Keshav Bajaj")
+        st.title(f" Hi 👋    I am {cfile['name']}")
     with columns[1]:
         st_lottie(lottie_coding, height=200, key="coding")
 
@@ -116,32 +125,10 @@ def home_page():
 
     # Page: Projects
     st.title("Projects")
-    
-    # Display top 2 projects
-    projects = [
-        {
-            "title": "Image-Super-Resolution-Using-Autoencoders-in-Keras/Tensorflow",
-            "description": "Conversion of low resolution images to high resolution using autoencoders and keras library with tensorflow as backend\
-                Basically This model is trained on most of car images so when you load it it may work better with car images\
-                but rather than taking this pretrained weights you can also train it on your own set of images.. You can train it on any dataset you want.",
-            "image": "supe.png",
-            "lottie_url":"https://assets3.lottiefiles.com/packages/lf20_vcvl4urd.json",
-            "repository": "https://github.com/Keshav15/Image-Super-Resolution-Using-Autoencoders-in-Keras",
-            "demo": "https://demo.project1.com"
-        },
-        {
-            "title": "Named Entity Recognition using BERT",
-            "description": "Description of project 2",
-            "image": "hirech.png",
-            "lottie_url":"https://assets1.lottiefiles.com/packages/lf20_Imjlj33KVc.json",
-            "repository": "https://github.com/your_username/project2",
-            "demo": "https://demo.project2.com"
-        },
-        # Add more projects as needed
-    ]
+
     columns = st.columns(2)
     # Display top 2 projects
-    for project in projects[:2]:
+    for project in cfile['projects'][:2]:
         with(columns[0]):
             st.markdown('<div class="project-card">', unsafe_allow_html=True)
             st.write(f"""## {project['title']}""")
@@ -157,9 +144,9 @@ def home_page():
             st.markdown('</div>', unsafe_allow_html=True)
 
     # "View More" button to show remaining projects
-    if len(projects) > 2:
+    if len(cfile['projects']) > 2:
         if st.button("View More"):
-            for project in projects[2:]:
+            for project in cfile['projects'][2:]:
                 st.markdown('<div class="project-card">', unsafe_allow_html=True)
                 st.image(project['image'], caption=project['description'], use_column_width=True)
                 st.markdown(f'<div class="project-card-title">{project["title"]}</div>', unsafe_allow_html=True)
@@ -171,34 +158,9 @@ def home_page():
 
     # Page: Blogs
     st.title("Blogs")
-    # Display blog posts
-    blogs = [
-        {
-            "title": "Analyzing Decision Tree and K-means Clustering using Iris Dataset",
-            "excerpt": "Learn how to analyze decision trees and K-means clustering using the Iris dataset.",
-            "publication_date": "2023-05-20",
-            "url": "https://www.geeksforgeeks.org/analyzing-decision-tree-and-k-means-clustering-using-iris-dataset/",
-            "image_path": "dectre.jpg"
-        },
-        {
-            "title": "Structured vs Unstructured Ward in Hierarchical Clustering using Scikit-learn",
-            "excerpt": "Explore the differences between structured and unstructured Ward in hierarchical clustering using Scikit-learn.",
-            "publication_date": "2023-05-25",
-            "url": "https://www.geeksforgeeks.org/structured-vs-unstructured-ward-in-hierarchical-clustering-using-scikit-learn/",
-            "image_path": "hirech.png"
-        },
-        {
-            "title": "Comparing Different Clustering Algorithms on Toy Datasets in Scikit-learn",
-            "excerpt": "Compare various clustering algorithms on toy datasets using Scikit-learn.",
-            "publication_date": "2023-06-01",
-            "url": "https://www.geeksforgeeks.org/comparing-different-clustering-algorithms-on-toy-datasets-in-scikit-learn/",
-            "image_path": "diff.png"
-        }
-    ]
 
-    # Create a grid layout for the blog cards
     columns = st.columns(2)
-    for blog in blogs:
+    for blog in cfile['blogs']:
         with columns[0]:
             st.subheader(blog["title"])
             st.write(blog["excerpt"])
@@ -208,31 +170,15 @@ def home_page():
             st.image(blog["image_path"], use_column_width=None,width=300)
             st.markdown(f"[Read more]({blog['url']})", unsafe_allow_html=True)
 
-    # Page: Skills
-    
+
+
     st.title("Tech Stack / Skills")
     col1, col2 = st.columns(2)
     with col1:
         
-        st.write(
-            """
-            ### Languages\n
-            ##### Python,C++ \n
-
-            ### Frameworks\n
-            ##### Tensorflow,Pytorch,Pyspark,Flask, \n
-
-            ### Databases\n
-            ##### MySQL, AWS Dynamodb, MongoDB \n
-
-            ### Cloud \n
-            ##### AWS, Azure, GCP, \n
-
-            ### Miscellaneous \n
-            ##### Machine learning ,Deep learning, NLP, Computer Vision\n 
-            ##### AWS lambda, Glue, Beanstalk ,Sagemaker, Git, Github, CI/CD, Docker,K8s
-             """
-        )
+        for item in cfile['techstack_skills']:
+            st.write(f"### {item['category']}")
+            st.write("##### " + ", ".join(item['skills']))
 
     with col2:
         st_lottie(
@@ -243,7 +189,7 @@ def home_page():
     # Page: Contact
     st.title("Contact")
     st.write("##### You can reach out to me through the following options:")
-    st.markdown("""
+    st.markdown(""" 
     <div class="contact-card">
         <div class="contact-card-title">Contact Details</div>
         <div class="contact-card-details">
@@ -263,6 +209,7 @@ def home_page():
     </div>
     """, unsafe_allow_html=True)
 
+
 def about_page():
     
     st.title("About")
@@ -271,10 +218,7 @@ def about_page():
     st.markdown('<div class="about-card">', unsafe_allow_html=True)
     
     st.markdown('<div class="about-card-details">', unsafe_allow_html=True)
-    st.write(' ##### I am a passionate software developer with experience in Big Data,cloud and  Machine learning . '
-                'My goal is to create meaningful and impactful projects that solve real-world problems. '
-                'I am constantly learning and exploring new technologies to expand my skill set and stay up-to-date '
-                'with the latest industry trends.', unsafe_allow_html=True)
+    st.write(f' ##### {cfile["about"]}', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -288,6 +232,13 @@ def main():
     about_page()
     # Display the home page content
     home_page()
+    hasClicked = card(
+    title="My Contact Details",
+    text=f"Email:{cfile['email']} ",
+    image="http://placekitten.com/200/300",
+    url="https://github.com/gamcoh/st-card"
+    
+)
 
 
 
