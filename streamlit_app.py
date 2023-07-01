@@ -2,12 +2,10 @@ import requests
 import streamlit as st
 from streamlit_lottie import st_lottie
 import json
-
+import base64
 from PIL import Image
 from streamlit_card import card
-
-
-
+import streamlit.components.v1 as components
 with open('config.json') as cf:
     cfile=json.load(cf)
 
@@ -48,7 +46,7 @@ def navbar():
 def nameandphoto():
     columns=st.columns(2)
     with columns[0]:
-        st.title(f" Hi 👋    I am {cfile['name']}")
+        st.title(f" Hi 👋  I am {cfile['name']}")
     with columns[1]:
         st_lottie(lottie_coding, height=200, key="coding")
 
@@ -136,10 +134,11 @@ def home_page():
             load_lottieurl(project['lottie_url']),
             height=500,width=800
         )
+            columns2=st.columns(2)
             st.write(f"""##### {project['description']} """)
             st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-            st.markdown(f'<a class="project-card-option" href="{project["repository"]}">View Source Code</a> | '
-                        f'<a class="project-card-option" href="{project["demo"]}">View Project</a>', unsafe_allow_html=True)
+            st.markdown(f'<a class="project-card-option" href="{project["repository"]}"><h4>View Source Code</h4></a>'
+                        f'<a class="project-card-option" href="{project["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -189,26 +188,83 @@ def home_page():
     # Page: Contact
     st.title("Contact")
     st.write("##### You can reach out to me through the following options:")
-    st.markdown(""" 
-    <div class="contact-card">
-        <div class="contact-card-title">Contact Details</div>
-        <div class="contact-card-details">
-            Email: keshavbajaj4444@gmail.com
-        </div>
-        <div class="contact-card-icons">
-            <a href="https://www.linkedin.com/yourprofile" class="contact-card-icon">
-                <img src="linkedin.png" alt="LinkedIn">
-            </a>
-            <a href="https://github.com/your_username" class="contact-card-icon">
-                <img src="github.png" alt="GitHub">
-            </a>
-            <a href="https://twitter.com/your_username" class="contact-card-icon">
-                <img src="twitter.png" alt="Twitter">
-            </a>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
+    # Contact card
+    st.markdown('<div class="contact-card">', unsafe_allow_html=True)
+    st.markdown('<div class="contact-card-title">Contact Details</div>', unsafe_allow_html=True)
+    st.markdown('<div class="contact-card-details">Email: keshavbajaj4444@gmail.com</div>', unsafe_allow_html=True)
+
+    # Three columns for icons
+    columns = st.columns(3)
+
+    # LinkedIn icon
+    with columns[0]:
+        res=card(
+            title="",
+            text="",
+            image="https://w7.pngwing.com/pngs/585/671/png-transparent-linkedin-communication-linkedin-corporation-corporation-3d-linkedin-3d-linkedin-logo-3d-icon-thumbnail.png",
+            styles={
+                "card": {
+                    "width": "100px",
+                    "height": "100px",
+                    "border-radius": "60px",
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                    
+                },
+                "text": {
+                    "font-family": "serif",
+                    
+                }
+            },
+            url=f"{cfile['social_links']['linkedin_url']}",
+            on_click=lambda: print("Clicked!")
+        )
+    # GitHub icon
+    with columns[1]:
+        res2=card(
+            title="",
+            text="",
+            image="https://1000logos.net/wp-content/uploads/2021/05/GitHub-logo-500x281.png",
+            styles={
+                "card": {
+                    "width": "100px",
+                    "height": "100px",
+                    "border-radius": "60px",
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                    
+                },
+                "text": {
+                    "font-family": "serif",
+                    
+                }
+            },
+            url=f"{cfile['social_links']['github_url']}",
+            on_click=lambda: print("Clicked!")
+        )
+    # Twitter icon
+    with columns[2]:
+        res3=card(
+            title="",
+            text="",
+            image="https://www.seekpng.com/png/full/15-155124_twitter-creative-icon-twitter-twitter-icon-twiter-twitter.png",
+            styles={
+                "card": {
+                    "width": "100px",
+                    "height": "100px",
+                    "border-radius": "60px",
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                    
+                },
+                "text": {
+                    "font-family": "serif",
+                    
+                }
+            },
+            url=f"{cfile['social_links']['twitter_url']}",
+            on_click=lambda: print("Clicked!")
+        )
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 def about_page():
     
@@ -216,7 +272,6 @@ def about_page():
     
     # About card
     st.markdown('<div class="about-card">', unsafe_allow_html=True)
-    
     st.markdown('<div class="about-card-details">', unsafe_allow_html=True)
     st.write(f' ###### {cfile["about"]}', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
@@ -232,13 +287,7 @@ def main():
     about_page()
     # Display the home page content
     home_page()
-    hasClicked = card(
-    title="My Contact Details",
-    text=f"Email:{cfile['email']} ",
-    image="http://placekitten.com/200/300",
-    url="https://github.com/gamcoh/st-card"
-    
-)
+
 
 
 

@@ -1,6 +1,6 @@
 {
   "name":"Keshav Bajaj",
-  "about":"I am a passionate software developer with experience in Big Data,cloud and  Machine learning .My goal is to create meaningful and impactful projects that solve real-world problems.I am constantly learning and exploring new technologies to expand my skill set and stay up-to-date with the latest industry trends.",
+  "about":"I am a passionate software developer with experience in Big Data,cloud and  Machine learning.My goal is to create meaningful and impactful projects that solve real-world problems.I am constantly learning and exploring new technologies to expand my skill set and stay up-to-date with the latest industry trends.",
   "email":"keshavbajaj4444@gmail.com",
   "experience":
   [
@@ -99,7 +99,14 @@
         ]
     }
 
-]
+],
+"social_links":
+{
+    "linkedin_url":"https://www.linkedin.com/in/keshavbajaj44/",
+    "github_url":"https://github.com/Keshav15",
+    "twitter_url":"https://twitter.com/Keshav62760813?t=P0-JMxBtLFrxTjbcT__cEQ&s=09"
+    
+}
 
 
 
