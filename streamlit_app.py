@@ -136,7 +136,7 @@ def home_page():
             load_lottieurl(project['lottie_url']),
             height=500,width=800
         )
-            st.write(f"""#### {project['description']} """)
+            st.write(f"""##### {project['description']} """)
             st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
             st.markdown(f'<a class="project-card-option" href="{project["repository"]}">View Source Code</a> | '
                         f'<a class="project-card-option" href="{project["demo"]}">View Project</a>', unsafe_allow_html=True)
@@ -218,7 +218,7 @@ def about_page():
     st.markdown('<div class="about-card">', unsafe_allow_html=True)
     
     st.markdown('<div class="about-card-details">', unsafe_allow_html=True)
-    st.write(f' ##### {cfile["about"]}', unsafe_allow_html=True)
+    st.write(f' ###### {cfile["about"]}', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
