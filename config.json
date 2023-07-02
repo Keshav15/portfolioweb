@@ -22,6 +22,14 @@
 ],
   "projects": [
     {
+        "title": "Opensource Portfolio Developer Using BERT model and PDF data extraction ",
+        "description": "Many people have their resumes in hand But it is more Insightful if some one shows their website or portfolio so with help of this projects.. A full deployed portfolio can be genrated by Just dropping his/her Resume on my website.",
+        "image": "supe.png",
+        "lottie_url":"https://assets7.lottiefiles.com/packages/lf20_hi95bvmx/WebdesignBg.json",
+        "repository": "https://github.com/Keshav15/Image-Super-Resolution-Using-Autoencoders-in-Keras",
+        "demo": "https://demo.project1.com"
+    },
+    {
         "title": "Image-Super-Resolution-Using-Autoencoders-in-Keras/Tensorflow",
         "description": "Conversion of low resolution images to high resolution using autoencoders and keras library with tensorflow as backend Basically This model is trained on most of car images so when you load it it may work better with car images but rather than taking this pretrained weights you can also train it on your own set of images.. You can train it on any dataset you want.",
         "image": "supe.png",
@@ -30,13 +38,14 @@
         "demo": "https://demo.project1.com"
     },
     {
-        "title": "Named Entity Recognition using BERT",
-        "description": "Description of project 2",
+        "title": "Named Entity Recognition using LSTM",
+        "description": "Named entity recognition models can be used to identify mentions of people, locations, organizations, etc. Named entity recognition is not only a standalone tool for information extraction, but it also an invaluable preprocessing step for many downstream natural language processing applications like machine translation, question answering, and text summarization,Data extraction from documents",
         "image": "hirech.png",
         "lottie_url":"https://assets1.lottiefiles.com/packages/lf20_Imjlj33KVc.json",
         "repository": "https://github.com/your_username/project2",
         "demo": "https://demo.project2.com"
     }
+
     
 ],
 "blogs": [
@@ -45,21 +54,21 @@
         "excerpt": "Learn how to analyze decision trees and K-means clustering using the Iris dataset.",
         "publication_date": "2023-05-20",
         "url": "https://www.geeksforgeeks.org/analyzing-decision-tree-and-k-means-clustering-using-iris-dataset/",
-        "image_path": "dectre.jpg"
+        "image_path": "https://mljar.com/blog/visualize-decision-tree/output_10_0.png"
     },
     {
         "title": "Structured vs Unstructured Ward in Hierarchical Clustering using Scikit-learn",
         "excerpt": "Explore the differences between structured and unstructured Ward in hierarchical clustering using Scikit-learn.",
         "publication_date": "2023-05-25",
         "url": "https://www.geeksforgeeks.org/structured-vs-unstructured-ward-in-hierarchical-clustering-using-scikit-learn/",
-        "image_path": "hirech.png"
+        "image_path": "https://scikit-learn.org/0.15/_images/plot_ward_structured_vs_unstructured_0011.png"
     },
     {
         "title": "Comparing Different Clustering Algorithms on Toy Datasets in Scikit-learn",
         "excerpt": "Compare various clustering algorithms on toy datasets using Scikit-learn.",
         "publication_date": "2023-06-01",
         "url": "https://www.geeksforgeeks.org/comparing-different-clustering-algorithms-on-toy-datasets-in-scikit-learn/",
-        "image_path": "diff.png"
+        "image_path": "https://scw-aberystwyth.github.io/machine-learning-novice/fig/kmeans_overlapping_clusters.png"
     }
 ],
 

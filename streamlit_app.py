@@ -6,6 +6,7 @@ import base64
 from PIL import Image
 from streamlit_card import card
 import streamlit.components.v1 as components
+import itertools
 with open('config.json') as cf:
     cfile=json.load(cf)
 
@@ -123,51 +124,97 @@ def home_page():
 
     # Page: Projects
     st.title("Projects")
-
+    projects=cfile['projects']
+    project_pairs=itertools.zip_longest(*[iter(projects)]*2)
     columns = st.columns(2)
     # Display top 2 projects
-    for project in cfile['projects'][:2]:
+    for project1,project2 in project_pairs:
         with(columns[0]):
             st.markdown('<div class="project-card">', unsafe_allow_html=True)
-            st.write(f"""## {project['title']}""")
+            st.write(f"""## {project1['title']}""")
             st_lottie(
-            load_lottieurl(project['lottie_url']),
+            load_lottieurl(project1['lottie_url']),
             height=500,width=800
         )
-            columns2=st.columns(2)
-            st.write(f"""##### {project['description']} """)
+          
+            st.write(f"""##### {project1['description']} """)
             st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-            st.markdown(f'<a class="project-card-option" href="{project["repository"]}"><h4>View Source Code</h4></a>'
-                        f'<a class="project-card-option" href="{project["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
+            st.markdown(f'<a class="project-card-option" href="{project1["repository"]}"><h4>View Source Code</h4></a>'
+                        f'<a class="project-card-option" href="{project1["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
-
-    # "View More" button to show remaining projects
-    if len(cfile['projects']) > 2:
-        if st.button("View More"):
-            for project in cfile['projects'][2:]:
+        with(columns[1]):
+            if project2:
                 st.markdown('<div class="project-card">', unsafe_allow_html=True)
-                st.image(project['image'], caption=project['description'], use_column_width=True)
-                st.markdown(f'<div class="project-card-title">{project["title"]}</div>', unsafe_allow_html=True)
+                st.write(f"""## {project2['title']}""")
+                st_lottie(
+                load_lottieurl(project2['lottie_url']),
+                height=500,width=800)
+          
+                st.write(f"""##### {project2['description']} """)
                 st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-                st.markdown(f'<a class="project-card-option" href="{project["repository"]}">View Source Code</a> | '
-                            f'<a class="project-card-option" href="{project["demo"]}">View Project</a>', unsafe_allow_html=True)
+                st.markdown(f'<a class="project-card-option" href="{project2["repository"]}"><h4>View Source Code</h4></a>'
+                            f'<a class="project-card-option" href="{project2["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-
+                st.markdown('</div>', unsafe_allow_html=True)            
+            
+    blogs=cfile['blogs']
+    blog_pairs = itertools.zip_longest(*[iter(blogs)] * 2) 
     # Page: Blogs
     st.title("Blogs")
 
-    columns = st.columns(2)
-    for blog in cfile['blogs']:
+    
+    for blog1, blog2 in blog_pairs:
+        columns = st.columns(2)  # Create two columns for each blog pair
+
         with columns[0]:
-            st.subheader(blog["title"])
-            st.write(blog["excerpt"])
-            st.write(f"Publication Date: {blog['publication_date']}")
-            
+            if blog1:
+                card1 = card(
+                    title=f"{blog1['title']}",
+                    text=f"{blog1['excerpt']}",
+                    image=f'{blog1["image_path"]}',
+                    styles={
+                        "card": {
+                            "width": "600px",
+                            "height": "200px",
+                            "border-radius": "10px",
+                            "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                            "margin": "10px",  # Adjust the margin as per your preference
+                            "padding": "10px"  # Adjust the padding as per your preference
+                        },
+                        "text": {
+                            "font-family": "serif"
+                        }
+                    },
+                    url=f"{blog1['url']}",
+                    on_click=lambda: print("Clicked!")
+                )
+
         with columns[1]:
-            st.image(blog["image_path"], use_column_width=None,width=300)
-            st.markdown(f"[Read more]({blog['url']})", unsafe_allow_html=True)
+            if blog2:
+                card2 = card(
+                    title=f"{blog2['title']}",
+                    text=f"{blog2['excerpt']}",
+                    image=f'{blog2["image_path"]}',
+                    styles={
+                        "card": {
+                            "width": "600px",
+                            "height": "200px",
+                            "border-radius": "10px",
+                            "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
+                            "margin": "10px",  # Adjust the margin as per your preference
+                            "padding": "10px"  # Adjust the padding as per your preference
+                        },
+                        "text": {
+                            "font-family": "serif"
+                        }
+                    },
+                    url=f"{blog2['url']}",
+                    on_click=lambda: print("Clicked!")
+                )
+               
+
+            
 
 
 
@@ -191,8 +238,8 @@ def home_page():
 
     # Contact card
     st.markdown('<div class="contact-card">', unsafe_allow_html=True)
-    st.markdown('<div class="contact-card-title">Contact Details</div>', unsafe_allow_html=True)
-    st.markdown('<div class="contact-card-details">Email: keshavbajaj4444@gmail.com</div>', unsafe_allow_html=True)
+    st.markdown('<div class="contact-card-title"><h3>Contact Details</h3></div>', unsafe_allow_html=True)
+    st.markdown('<div class="contact-card-details"><h4>Email: keshavbajaj4444@gmail.com</h4></div>', unsafe_allow_html=True)
 
     # Three columns for icons
     columns = st.columns(3)
@@ -273,7 +320,7 @@ def about_page():
     # About card
     st.markdown('<div class="about-card">', unsafe_allow_html=True)
     st.markdown('<div class="about-card-details">', unsafe_allow_html=True)
-    st.write(f' ###### {cfile["about"]}', unsafe_allow_html=True)
+    st.write(f' ##### {cfile["about"]}', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
