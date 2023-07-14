@@ -130,80 +130,71 @@ def home_page():
     columns = st.columns(2)
     card_template = """
     <div class="custom-card">
-        <div class="card-content">
-            <h3>{title}</h3>
-            <div class="lottie-container">
-                <lottie-player src="{lottie_url}" background="transparent" speed="1" style="width: 200px; height: 200px;"></lottie-player>
-            </div>
-            <p>{description}</p>
-        </div>
+        <h3>{title}</h3>
+        <img src="{image_url}" alt="{title} Image" style="width: 200px; height: 200px; object-fit: cover; border-radius: 10px;">
+        <p>{description}</p>
         <div class="card-links">
             <a class="card-link" href="{repository}" target="_blank">View Source Code</a>
             <a class="card-link" href="{demo}" target="_blank">View Project</a>
         </div>
     </div>
     """
+
+    # CSS styles
     css_styles = """
-<style>
-.custom-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    transition: box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
+    <style>
+    .custom-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        transition: box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
-.custom-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
+    .custom-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
-.lottie-container {
-    width: 200px;
-    height: 200px;
-    margin-bottom: 20px;
-}
+    .card-content p {
+        margin-bottom: 20px;
+    }
 
-.card-content p {
-    margin-bottom: 20px;
-}
+    .card-links {
+        display: flex;
+        justify-content: center;
+    }
 
-.card-links {
-    display: flex;
-    justify-content: center;
-}
+    .card-link {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 8px 16px;
+        background-color: #f5f5f5;
+        color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-.card-link {
-    display: inline-block;
-    margin: 0 10px;
-    padding: 8px 16px;
-    background-color: #f5f5f5;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.card-link:hover {
-    background-color: #ff6600;
-    color: #fff;
-}
-</style>
+    .card-link:hover {
+        background-color: #ff6600;
+        color: #fff;
+    }
+    </style>
     """
 
     # Apply custom card template and CSS styles for each project
     st.markdown(css_styles, unsafe_allow_html=True)
-# Apply custom card template for each project
     for project1, project2 in project_pairs:
         columns = st.columns(2)
-        
+
         with columns[0]:
             if project1:
                 st.markdown(card_template.format(
                     title=project1["title"],
-                    lottie_url=project1["lottie_url"],
+                    image_url=project1["image"],
                     description=project1["description"],
                     repository=project1["repository"],
                     demo=project1["demo"]
@@ -213,12 +204,11 @@ def home_page():
             if project2:
                 st.markdown(card_template.format(
                     title=project2["title"],
-                    lottie_url=project2["lottie_url"],
+                    image_url=project2["image"],
                     description=project2["description"],
                     repository=project2["repository"],
                     demo=project2["demo"]
                 ), unsafe_allow_html=True)
-
     # # Display top 2 projects
     # for project1,project2 in project_pairs:
     #     with(columns[0]):
