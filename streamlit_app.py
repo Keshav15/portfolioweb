@@ -130,17 +130,19 @@ def home_page():
     columns = st.columns(2)
     card_template = """
     <div class="custom-card">
-        <h3>{title}</h3>
-        <div class="lottie-container" id="lottie-{title.replace(" ", "")}"></div>
-        <p>{description}</p>
+        <div class="card-content">
+            <h3>{title}</h3>
+            <div class="lottie-container">
+                <lottie-player src="{lottie_url}" background="transparent" speed="1" style="width: 200px; height: 200px;"></lottie-player>
+            </div>
+            <p>{description}</p>
+        </div>
         <div class="card-links">
             <a class="card-link" href="{repository}" target="_blank">View Source Code</a>
             <a class="card-link" href="{demo}" target="_blank">View Project</a>
         </div>
     </div>
     """
-
-    # CSS styles
     css_styles = """
     <style>
     .custom-card {
@@ -148,29 +150,20 @@ def home_page():
         border-radius: 10px;
         padding: 20px;
         transition: box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
     }
 
     .custom-card:hover {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    .lottie-container {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 20px;
-    }
-
-    .card-content p {
-        margin-bottom: 20px;
+    .card-content {
+        text-align: center;
     }
 
     .card-links {
         display: flex;
         justify-content: center;
+        margin-top: 20px;
     }
 
     .card-link {
@@ -193,52 +186,30 @@ def home_page():
 
     # Apply custom card template and CSS styles for each project
     st.markdown(css_styles, unsafe_allow_html=True)
+# Apply custom card template for each project
     for project1, project2 in project_pairs:
         columns = st.columns(2)
-
+        
         with columns[0]:
             if project1:
                 st.markdown(card_template.format(
                     title=project1["title"],
+                    lottie_url=project1["lottie_url"],
                     description=project1["description"],
                     repository=project1["repository"],
                     demo=project1["demo"]
                 ), unsafe_allow_html=True)
-                components.html(
-                    f'<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>'
-                    f'<script>'
-                    f'    var animation = bodymovin.loadAnimation({{'
-                    f'        container: document.getElementById("lottie-{project1["title"].replace(" ", "")}"),'
-                    f'        renderer: "svg",'
-                    f'        loop: true,'
-                    f'        autoplay: true,'
-                    f'        path: "{project1["lottie_url"]}"'
-                    f'    }});'
-                    f'</script>',
-                    unsafe_allow_html=True
-                )
 
         with columns[1]:
             if project2:
                 st.markdown(card_template.format(
                     title=project2["title"],
+                    lottie_url=project2["lottie_url"],
                     description=project2["description"],
                     repository=project2["repository"],
                     demo=project2["demo"]
                 ), unsafe_allow_html=True)
-                components.html(
-                    f'<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.13/lottie.min.js"></script>'
-                    f'<script>'
-                    f'    var animation = bodymovin.loadAnimation({{'
-                    f'        container: document.getElementById("lottie-{project2["title"].replace(" ", "")}"),'
-                    f'        renderer: "svg",'
-                    f'        loop: true,'
-                    f'        autoplay: true,'
-                    f'        path: "{project2["lottie_url"]}"'
-                    f'    }});'
-                    f'</script>',
-                    unsafe_allow_html=True
-                )
+
     # # Display top 2 projects
     # for project1,project2 in project_pairs:
     #     with(columns[0]):
