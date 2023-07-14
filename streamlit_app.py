@@ -143,7 +143,49 @@ def home_page():
         </div>
     </div>
     """
+    css_styles = """
+    <style>
+    .custom-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        transition: box-shadow 0.3s;
+    }
 
+    .custom-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-content {
+        text-align: center;
+    }
+
+    .card-links {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .card-link {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 8px 16px;
+        background-color: #f5f5f5;
+        color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .card-link:hover {
+        background-color: #ff6600;
+        color: #fff;
+    }
+    </style>
+    """
+
+    # Apply custom card template and CSS styles for each project
+    st.markdown(css_styles, unsafe_allow_html=True)
 # Apply custom card template for each project
     for project1, project2 in project_pairs:
         columns = st.columns(2)
