@@ -125,38 +125,108 @@ def home_page():
     # Page: Projects
     st.title("Projects")
     projects=cfile['projects']
-    project_pairs=itertools.zip_longest(*[iter(projects)]*2)
-    columns = st.columns(2)
-    # Display top 2 projects
-    for project1,project2 in project_pairs:
-        with(columns[0]):
-            st.markdown('<div class="project-card">', unsafe_allow_html=True)
-            st.write(f"""## {project1['title']}""")
-            st_lottie(
-            load_lottieurl(project1['lottie_url']),
-            height=500,width=800
-        )
-          
-            st.write(f"""##### {project1['description']} """)
-            st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-            st.markdown(f'<a class="project-card-option" href="{project1["repository"]}"><h4>View Source Code</h4></a>'
-                        f'<a class="project-card-option" href="{project1["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-        with(columns[1]):
+    project_pairs = itertools.zip_longest(*[iter(projects)] * 2)
+
+    # Display projects using Streamlit Cards
+    for project1, project2 in project_pairs:
+        columns = st.columns(2)
+        
+        with columns[0]:
+            if project1:
+                card1 = card(
+                    title=project1["title"],
+                    text=project1["description"],
+                    image=project1["lottie_url"],
+                    styles={
+                        "card": {
+                            "width": "300px",
+                            "height": "400px",
+                            "border-radius": "10px",
+                            "box-shadow": "0 2px 6px rgba(0, 0, 0, 0.1)",
+                            "padding": "20px",
+                            "display": "flex",
+                            "flex-direction": "column",
+                            "align-items": "center",
+                            "justify-content": "center"
+                        },
+                        "image": {
+                            "width": "200px",
+                            "height": "200px"
+                        },
+                        "title": {
+                            "font-size": "20px"
+                        },
+                        "text": {
+                            "font-size": "16px"
+                        }
+                    },
+                    url=project1["demo"]
+                )
+
+        with columns[1]:
             if project2:
-                st.markdown('<div class="project-card">', unsafe_allow_html=True)
-                st.write(f"""## {project2['title']}""")
-                st_lottie(
-                load_lottieurl(project2['lottie_url']),
-                height=500,width=800)
+                card2 = card(
+                    title=project2["title"],
+                    text=project2["description"],
+                    image=project2["lottie_url"],
+                    styles={
+                        "card": {
+                            "width": "300px",
+                            "height": "400px",
+                            "border-radius": "10px",
+                            "box-shadow": "0 2px 6px rgba(0, 0, 0, 0.1)",
+                            "padding": "20px",
+                            "display": "flex",
+                            "flex-direction": "column",
+                            "align-items": "center",
+                            "justify-content": "center"
+                        },
+                        "image": {
+                            "width": "200px",
+                            "height": "200px"
+                        },
+                        "title": {
+                            "font-size": "20px"
+                        },
+                        "text": {
+                            "font-size": "16px"
+                        }
+                    },
+                    url=project2["demo"]
+                )    
+  
+    # project_pairs=itertools.zip_longest(*[iter(projects)]*2)
+    # columns = st.columns(2)
+    # # Display top 2 projects
+    # for project1,project2 in project_pairs:
+    #     with(columns[0]):
+    #         st.markdown('<div class="project-card">', unsafe_allow_html=True)
+    #         st.write(f"""## {project1['title']}""")
+    #         st_lottie(
+    #         load_lottieurl(project1['lottie_url']),
+    #         height=500,width=800
+    #     )
           
-                st.write(f"""##### {project2['description']} """)
-                st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-                st.markdown(f'<a class="project-card-option" href="{project2["repository"]}"><h4>View Source Code</h4></a>'
-                            f'<a class="project-card-option" href="{project2["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)            
+    #         st.write(f"""##### {project1['description']} """)
+    #         st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
+    #         st.markdown(f'<a class="project-card-option" href="{project1["repository"]}"><h4>View Source Code</h4></a>'
+    #                     f'<a class="project-card-option" href="{project1["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
+    #         st.markdown('</div>', unsafe_allow_html=True)
+    #         st.markdown('</div>', unsafe_allow_html=True)
+    #     with(columns[1]):
+    #         if project2:
+    #             st.markdown('<div class="project-card">', unsafe_allow_html=True)
+    #             st.write(f"""## {project2['title']}""")
+    #             st_lottie(
+    #             load_lottieurl(project2['lottie_url']),
+    #             height=500,width=800)
+          
+    #             st.write(f"""##### {project2['description']} """)
+    #             st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
+    #             st.markdown(f'<a class="project-card-option" href="{project2["repository"]}"><h4>View Source Code</h4></a>'
+    #                         f'<a class="project-card-option" href="{project2["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
+    #             st.markdown('</div>', unsafe_allow_html=True)
+    #             st.markdown('</div>', unsafe_allow_html=True)            
             
     blogs=cfile['blogs']
     blog_pairs = itertools.zip_longest(*[iter(blogs)] * 2) 
