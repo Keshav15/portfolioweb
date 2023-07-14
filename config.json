@@ -40,7 +40,7 @@
     {
         "title": "Named Entity Recognition using LSTM",
         "description": "Named entity recognition models can be used to identify mentions of people, locations, organizations, etc. Named entity recognition is not only a standalone tool for information extraction, but it also an invaluable preprocessing step for many downstream natural language processing applications like machine translation, question answering, and text summarization,Data extraction from documents",
-        "image": "hirech.png",
+        "image": "https://editor.analyticsvidhya.com/uploads/19617Intro%20image.jpg",
         "lottie_url":"https://assets1.lottiefiles.com/packages/lf20_Imjlj33KVc.json",
         "repository": "https://github.com/your_username/project2",
         "demo": "https://demo.project2.com"
