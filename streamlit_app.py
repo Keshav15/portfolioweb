@@ -129,18 +129,20 @@ def home_page():
     
     columns = st.columns(2)
     card_template = """
-<div class="custom-card">
-    <h3>{title}</h3>
-    <div class="lottie-container">
-        <lottie-player src="{lottie_url}" background="transparent" speed="1" style="width: 200px; height: 200px;"></lottie-player>
+    <div class="custom-card">
+        <div class="card-content">
+            <h3>{title}</h3>
+            <div class="lottie-container">
+                <lottie-player src="{lottie_url}" background="transparent" speed="1" style="width: 200px; height: 200px;"></lottie-player>
+            </div>
+            <p>{description}</p>
+        </div>
+        <div class="card-links">
+            <a class="card-link" href="{repository}" target="_blank">View Source Code</a>
+            <a class="card-link" href="{demo}" target="_blank">View Project</a>
+        </div>
     </div>
-    <p>{description}</p>
-    <div class="links">
-        <a href="{repository}" target="_blank">View Source Code</a>
-        <a href="{demo}" target="_blank">View Project</a>
-    </div>
-</div>
-"""
+    """
 
 # Apply custom card template for each project
     for project1, project2 in project_pairs:
