@@ -24,7 +24,7 @@
     {
         "title": "Opensource Portfolio Developer Using BERT model and PDF data extraction ",
         "description": "Many people have their resumes in hand But it is more Insightful if some one shows their website or portfolio so with help of this projects.. A full deployed portfolio can be genrated by Just dropping his/her Resume on my website.",
-        "image": "supe.png",
+        "image": "https://docparser.com/wp-content/uploads/2021/05/extract-data-from-pdf-with-docparser-300x124.png",
         "lottie_url":"https://assets7.lottiefiles.com/packages/lf20_hi95bvmx/WebdesignBg.json",
         "repository": "https://github.com/Keshav15/Image-Super-Resolution-Using-Autoencoders-in-Keras",
         "demo": "https://demo.project1.com"
@@ -32,7 +32,7 @@
     {
         "title": "Image-Super-Resolution-Using-Autoencoders-in-Keras/Tensorflow",
         "description": "Conversion of low resolution images to high resolution using autoencoders and keras library with tensorflow as backend Basically This model is trained on most of car images so when you load it it may work better with car images but rather than taking this pretrained weights you can also train it on your own set of images.. You can train it on any dataset you want.",
-        "image": "supe.png",
+        "image": "https://i.ytimg.com/vi/5GXRsskMr0E/maxresdefault.jpg",
         "lottie_url":"https://assets3.lottiefiles.com/packages/lf20_vcvl4urd.json",
         "repository": "https://github.com/Keshav15/Image-Super-Resolution-Using-Autoencoders-in-Keras",
         "demo": "https://demo.project1.com"
