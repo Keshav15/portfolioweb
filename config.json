@@ -6,7 +6,7 @@
     [
       {
           "company_name": "Abzooba -UST",
-          "company_logo":"/home/keshav/Desktop/portfolioweb/dectre.jpg",
+          "company_logo":"https://hunarsource.com/wp-content/uploads/2022/08/abzooba-1740x980.jpg",
           "jobtype":"Full-Time",
           "job_title": "Big Data and Cloud Associate",
           "start_date": "May 2022",
@@ -16,7 +16,7 @@
       {
           "company_name": "CDAC",
           "jobtype":"Intern",
-          "company_logo":"/home/keshav/Desktop/portfolioweb/dectre.jpg",
+          "company_logo":"",
           "job_title": "Machine learning Intern",
           "start_date": "June 2021",
           "end_date":"Aug 2021",
