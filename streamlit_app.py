@@ -7,9 +7,9 @@ from PIL import Image
 from streamlit_card import card
 import streamlit.components.v1 as components
 import itertools
-with open('config.json') as cf:
-    cfile=json.load(cf)
 
+with open('config.json') as cf:
+    cfile = json.load(cf)
 
 def navbar():
     st.markdown("""
@@ -39,13 +39,10 @@ def navbar():
         <a href="#Tech Stack / Skills">Skills</a>
         <a href="#Publications">Publications</a>
         <a href="#contact">Contact</a>
-    </div>""",unsafe_allow_html=True)
-
-
-
+    </div>""", unsafe_allow_html=True)
 
 def nameandphoto():
-    columns=st.columns(2)
+    columns = st.columns(2)
     with columns[0]:
         st.title(f" Hi 👋  I am {cfile['name']}")
     with columns[1]:
@@ -59,15 +56,12 @@ def load_lottieurl(url):
 
 lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json")
 
-lottie_projects= load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_zP38h7.json")
-# Page: Home
-def home_page():
-    
-    st.write("Here you can explore my portfolio, projects, blogs, skills, and contact details.")
+lottie_projects = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_zP38h7.json")
 
-    # Add navigation menu
+def home_page():
+    st.write("Here you can explore my portfolio, projects, blogs, skills, and contact details.")
     st.markdown("""
-    <style>
+        <style>
         .contact-card {
             background-color: #f5f5f5;
             padding: 20px;
@@ -117,16 +111,58 @@ def home_page():
         .col2 {
             font-size: 10px;
         }
-        
+
+        .experience-card {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .experience-card img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .experience-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .experience-card h4 {
+            margin: 0;
+        }
+
+        .experience-card p {
+            margin-top: 10px;
+        }
+
     </style>
-
     """, unsafe_allow_html=True)
-
-    # Page: Projects
-    st.title("Projects")
-    projects=cfile['projects']
-    project_pairs=itertools.zip_longest(*[iter(projects)]*2)
     
+    st.title("Work Experience")
+
+    for experience in cfile['work_experience']:
+        st.markdown('<div class="experience-card">', unsafe_allow_html=True)
+
+        if experience.get('company_logo'):
+            st.image(experience['company_logo'], width=100)
+
+        st.write(f"## {experience['company_name']}")
+        st.write(f"### {experience['start_date']} - {experience['end_date']}")
+        st.write(f"#### {experience['job_title']}")
+        st.write(experience['job_description'])
+
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    st.title("Projects")
+    projects = cfile['projects']
+    project_pairs = itertools.zip_longest(*[iter(projects)] * 2)
+
     columns = st.columns(2)
     card_template = """
     <div class="custom-card">
@@ -140,7 +176,6 @@ def home_page():
     </div>
     """
 
-    # CSS styles
     css_styles = """
     <style>
     .custom-card {
@@ -185,7 +220,6 @@ def home_page():
     </style>
     """
 
-    # Apply custom card template and CSS styles for each project
     st.markdown(css_styles, unsafe_allow_html=True)
     for project1, project2 in project_pairs:
         columns = st.columns(2)
@@ -194,7 +228,7 @@ def home_page():
             if project1:
                 st.markdown(card_template.format(
                     title=project1["title"],
-                    image_url=project1["image"],
+                    image_url=project1.get("image", ""),
                     description=project1["description"],
                     repository=project1["repository"],
                     demo=project1["demo"]
@@ -204,65 +238,33 @@ def home_page():
             if project2:
                 st.markdown(card_template.format(
                     title=project2["title"],
-                    image_url=project2["image"],
+                    image_url=project2.get("image", ""),
                     description=project2["description"],
                     repository=project2["repository"],
                     demo=project2["demo"]
                 ), unsafe_allow_html=True)
-    # # Display top 2 projects
-    # for project1,project2 in project_pairs:
-    #     with(columns[0]):
-    #         st.markdown('<div class="project-card">', unsafe_allow_html=True)
-    #         st.write(f"""## {project1['title']}""")
-    #         st_lottie(
-    #         load_lottieurl(project1['lottie_url']),
-    #         height=500,width=800
-    #     )
-          
-    #         st.write(f"""##### {project1['description']} """)
-    #         st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-    #         st.markdown(f'<a class="project-card-option" href="{project1["repository"]}"><h4>View Source Code</h4></a>'
-    #                     f'<a class="project-card-option" href="{project1["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
-    #         st.markdown('</div>', unsafe_allow_html=True)
-    #         st.markdown('</div>', unsafe_allow_html=True)
-    #     with(columns[1]):
-    #         if project2:
-    #             st.markdown('<div class="project-card">', unsafe_allow_html=True)
-    #             st.write(f"""## {project2['title']}""")
-    #             st_lottie(
-    #             load_lottieurl(project2['lottie_url']),
-    #             height=500,width=800)
-          
-    #             st.write(f"""##### {project2['description']} """)
-    #             st.markdown('<div class="project-card-options">', unsafe_allow_html=True)
-    #             st.markdown(f'<a class="project-card-option" href="{project2["repository"]}"><h4>View Source Code</h4></a>'
-    #                         f'<a class="project-card-option" href="{project2["demo"]}"><h4>View Project</h4></a>', unsafe_allow_html=True)
-    #             st.markdown('</div>', unsafe_allow_html=True)
-    #             st.markdown('</div>', unsafe_allow_html=True)            
-            
-    blogs=cfile['blogs']
-    blog_pairs = itertools.zip_longest(*[iter(blogs)] * 2) 
-    # Page: Blogs
-    st.title("Blogs")
 
+    st.title("Blogs")
+    blogs = cfile['blogs']
+    blog_pairs = itertools.zip_longest(*[iter(blogs)] * 2)
     
     for blog1, blog2 in blog_pairs:
-        columns = st.columns(2)  # Create two columns for each blog pair
+        columns = st.columns(2)
 
         with columns[0]:
             if blog1:
                 card1 = card(
                     title=f"{blog1['title']}",
                     text=f"{blog1['excerpt']}",
-                    image=f'{blog1["image_path"]}',
+                    image=f'{blog1.get("image_path", "")}',
                     styles={
                         "card": {
                             "width": "600px",
                             "height": "200px",
                             "border-radius": "10px",
                             "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                            "margin": "10px",  # Adjust the margin as per your preference
-                            "padding": "10px"  # Adjust the padding as per your preference
+                            "margin": "10px",
+                            "padding": "10px"
                         },
                         "text": {
                             "font-family": "serif"
@@ -277,15 +279,15 @@ def home_page():
                 card2 = card(
                     title=f"{blog2['title']}",
                     text=f"{blog2['excerpt']}",
-                    image=f'{blog2["image_path"]}',
+                    image=f'{blog2.get("image_path", "")}',
                     styles={
                         "card": {
                             "width": "600px",
                             "height": "200px",
                             "border-radius": "10px",
                             "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                            "margin": "10px",  # Adjust the margin as per your preference
-                            "padding": "10px"  # Adjust the padding as per your preference
+                            "margin": "10px",
+                            "padding": "10px"
                         },
                         "text": {
                             "font-family": "serif"
@@ -294,16 +296,10 @@ def home_page():
                     url=f"{blog2['url']}",
                     on_click=lambda: print("Clicked!")
                 )
-               
-
-            
-
-
 
     st.title("Tech Stack / Skills")
     col1, col2 = st.columns(2)
     with col1:
-        
         for item in cfile['techstack_skills']:
             st.write(f"### {item['category']}")
             st.write("##### " + ", ".join(item['skills']))
@@ -311,24 +307,19 @@ def home_page():
     with col2:
         st_lottie(
             load_lottieurl("https://assets1.lottiefiles.com/packages/lf20_ba013t74.json"),
-            height=400,width=400
+            height=400, width=400
         )
 
-    # Page: Contact
     st.title("Contact")
     st.write("##### You can reach out to me through the following options:")
-
-    # Contact card
     st.markdown('<div class="contact-card">', unsafe_allow_html=True)
     st.markdown('<div class="contact-card-title"><h3>Contact Details</h3></div>', unsafe_allow_html=True)
     st.markdown('<div class="contact-card-details"><h4>Email: keshavbajaj4444@gmail.com</h4></div>', unsafe_allow_html=True)
 
-    # Three columns for icons
     columns = st.columns(3)
 
-    # LinkedIn icon
     with columns[0]:
-        res=card(
+        res = card(
             title="",
             text="",
             image="https://w7.pngwing.com/pngs/585/671/png-transparent-linkedin-communication-linkedin-corporation-corporation-3d-linkedin-3d-linkedin-logo-3d-icon-thumbnail.png",
@@ -337,20 +328,18 @@ def home_page():
                     "width": "100px",
                     "height": "100px",
                     "border-radius": "60px",
-                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                    
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)", 
                 },
                 "text": {
-                    "font-family": "serif",
-                    
+                    "font-family": "serif", 
                 }
             },
-            url=f"{cfile['social_links']['linkedin_url']}",
+            url=f"{cfile['social_links'].get('linkedin_url', '')}",
             on_click=lambda: print("Clicked!")
         )
-    # GitHub icon
+
     with columns[1]:
-        res2=card(
+        res2 = card(
             title="",
             text="",
             image="https://1000logos.net/wp-content/uploads/2021/05/GitHub-logo-500x281.png",
@@ -359,20 +348,18 @@ def home_page():
                     "width": "100px",
                     "height": "100px",
                     "border-radius": "60px",
-                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                    
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)", 
                 },
                 "text": {
-                    "font-family": "serif",
-                    
+                    "font-family": "serif", 
                 }
             },
-            url=f"{cfile['social_links']['github_url']}",
+            url=f"{cfile['social_links'].get('github_url', '')}",
             on_click=lambda: print("Clicked!")
         )
-    # Twitter icon
+
     with columns[2]:
-        res3=card(
+        res3 = card(
             title="",
             text="",
             image="https://www.seekpng.com/png/full/15-155124_twitter-creative-icon-twitter-twitter-icon-twiter-twitter.png",
@@ -381,44 +368,32 @@ def home_page():
                     "width": "100px",
                     "height": "100px",
                     "border-radius": "60px",
-                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)",
-                    
+                    "box-shadow": "0 0 10px rgba(0,0,0,0.5)", 
                 },
                 "text": {
-                    "font-family": "serif",
-                    
+                    "font-family": "serif", 
                 }
             },
-            url=f"{cfile['social_links']['twitter_url']}",
+            url=f"{cfile['social_links'].get('twitter_url', '')}",
             on_click=lambda: print("Clicked!")
         )
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 def about_page():
-    
     st.title("About")
-    
-    # About card
     st.markdown('<div class="about-card">', unsafe_allow_html=True)
     st.markdown('<div class="about-card-details">', unsafe_allow_html=True)
-    st.write(f' ##### {cfile["about"]}', unsafe_allow_html=True)
+    st.write(f'##### {cfile["about"]}', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-
-
-# Main program
 def main():
-    st.set_page_config(layout="wide",page_title="Keshav Bajaj")  # Set the page title
+    st.set_page_config(layout="wide", page_title="Keshav Bajaj")
     navbar()
     nameandphoto()
     about_page()
-    # Display the home page content
     home_page()
-
-
-
 
 if __name__ == "__main__":
     main()
